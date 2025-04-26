@@ -35,6 +35,7 @@ stdenv.mkDerivation rec {
     && !stdenv.hostPlatform.isFreeBSD
     && !(stdenv.hostPlatform.libc == "glibc" && stdenv.hostPlatform.isi686)
     && (stdenv.hostPlatform.libc != "musl")
+    && !stdenv.buildPlatform.isLoongArch64
     && stdenv.hostPlatform == stdenv.buildPlatform;
 
   outputs = [

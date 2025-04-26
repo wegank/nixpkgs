@@ -178,6 +178,7 @@ stdenv.mkDerivation rec {
   doCheck =
     (!isCross)
     && (stdenv.hostPlatform.libc == "glibc" || stdenv.hostPlatform.libc == "musl")
+    && !stdenv.buildPlatform.isLoongArch64
     && !stdenv.hostPlatform.isAarch32;
 
   # Prevents attempts of running 'help2man' on cross-built binaries.

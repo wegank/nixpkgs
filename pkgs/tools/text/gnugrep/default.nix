@@ -63,6 +63,7 @@ stdenv.mkDerivation {
     && !stdenv.hostPlatform.isFreeBSD
     && !(stdenv.hostPlatform.isDarwin && stdenv.hostPlatform.isx86_64)
     && !stdenv.buildPlatform.isRiscV64
+    && !stdenv.buildPlatform.isLoongArch64
     && !stdenv.hostPlatform.isAarch32;
 
   # On macOS, force use of mkdir -p, since Grep's fallback
