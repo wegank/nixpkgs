@@ -70,7 +70,8 @@ let
     # to build a .dll on windows, we need --disable-static + --enable-shared
     # see https://gmplib.org/manual/Notes-for-Particular-Systems.html
     ++ optional (!withStatic && stdenv.hostPlatform.isPE) "--disable-static --enable-shared"
-    ++ optional (stdenv.hostPlatform.isDarwin && stdenv.hostPlatform.isAarch64) "--disable-assembly";
+    ++ optional stdenv.cc.isClang "--disable-fat"
+    ++ optional (stdenv.cc.isClang || (stdenv.hostPlatform.isDarwin && stdenv.hostPlatform.isAarch64)) "--disable-assembly";
 
     doCheck = true; # not cross;
 

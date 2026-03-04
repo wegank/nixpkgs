@@ -14,8 +14,8 @@
   lapack,
   boehmgc,
   openblas ? null,
-  withBlas ? true,
-  withNtl ? !ntl.meta.broken,
+  withBlas ? false,
+  withNtl ? false,
   withGc ? false,
 }:
 

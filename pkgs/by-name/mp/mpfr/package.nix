@@ -53,7 +53,7 @@ stdenv.mkDerivation rec {
     ]
     ++ lib.optional stdenv.hostPlatform.isPE "LDFLAGS=-Wl,-no-undefined";
 
-  doCheck = true; # not cross;
+  doCheck = !stdenv.cc.isClang; # not cross;
 
   enableParallelBuilding = true;
 

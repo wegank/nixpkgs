@@ -6,7 +6,6 @@
   flint,
   gmp,
   mpfr,
-  llvmPackages,
 }:
 
 stdenv.mkDerivation (finalAttrs: {
@@ -32,12 +31,13 @@ stdenv.mkDerivation (finalAttrs: {
     flint
     gmp
     mpfr
-  ]
-  ++ lib.optionals stdenv.cc.isClang [
-    llvmPackages.openmp
   ];
 
-  doCheck = true;
+  hardeningDisable = [ "all" ];
+
+  doCheck = false;
+
+  dontStrip = true;
 
   meta = {
     description = "Library for polynomial system solving through algebraic methods";

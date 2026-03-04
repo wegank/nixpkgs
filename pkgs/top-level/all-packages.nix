@@ -2969,6 +2969,8 @@ with pkgs;
 
   metasploit = callPackage ../tools/security/metasploit { };
 
+  msolve-llvm = enableDebugging pkgsLLVM.msolve;
+
   mtr = callPackage ../tools/networking/mtr { };
 
   mtr-gui = callPackage ../tools/networking/mtr { withGtk = true; };
