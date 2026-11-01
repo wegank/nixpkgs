@@ -2,7 +2,6 @@
   lib,
   rustPlatform,
   fetchFromGitHub,
-  dbus,
   git,
   pkg-config,
   makeWrapper,
@@ -35,11 +34,6 @@ rustPlatform.buildRustPackage (finalAttrs: {
 
   cargoHash = "sha256-E0jX6wQDqwPm25pOXza2L3JJ75PkjXDzgeSFNEInjHg=";
 
-  postPatch = ''
-    substituteInPlace src/system_notifications/tests.rs \
-      --replace-fail '"--session"' '"--config-file=${dbus}/share/dbus-1/session.conf"'
-  '';
-
   nativeBuildInputs = [
     makeWrapper
     pkg-config
@@ -60,13 +54,16 @@ rustPlatform.buildRustPackage (finalAttrs: {
     wayland
   ];
 
-  nativeCheckInputs = [
-    dbus
-    git
-  ];
+  nativeCheckInputs = [ git ];
 
-  # The login shell test requires /bin/sh and /usr/bin/env, which are absent in the sandbox.
-  checkFlags = [ "--skip=shell_env::tests::reads_path_from_a_login_shell" ];
+  checkFlags = [
+    # Requires /bin/sh and /usr/bin/env, which are absent in the sandbox.
+    "--skip=shell_env::tests::reads_path_from_a_login_shell"
+    # Flaky: executing the temporary script can fail with ETXTBSY during parallel tests.
+    "--skip=claude_auth::tests::background_login_reports_success_and_failure"
+    # Flaky: times out waiting for a notification event on CI.
+    "--skip=system_notifications::tests::reuses_connection_replaces_notifications_and_releases_resources"
+  ];
 
   nativeInstallCheckInputs = [ versionCheckHook ];
   versionCheckProgramArg = "--version";
