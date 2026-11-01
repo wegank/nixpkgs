@@ -17433,6 +17433,20 @@ final: prev: {
     meta.hydraPlatforms = [ ];
   };
 
+  tacho-nvim = buildVimPlugin {
+    pname = "tacho.nvim";
+    version = "0.1.0";
+    src = fetchFromGitHub {
+      owner = "farbzen";
+      repo = "tacho.nvim";
+      tag = "v0.1.0";
+      hash = "sha256-lJbf9T6EsVYSadYn1aRprFgVWtwe7CEqdnCmUUE9K1M=";
+    };
+    meta.homepage = "https://github.com/farbzen/tacho.nvim/";
+    meta.license = getLicenseFromSpdxId "MIT";
+    meta.hydraPlatforms = [ ];
+  };
+
   tagalong-vim = buildVimPlugin {
     pname = "tagalong.vim";
     version = "0.2.2-unstable-2026-09-30";
