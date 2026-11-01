@@ -54,7 +54,7 @@ python3Packages.buildPythonApplication (finalAttrs: {
     cloup
     deprecated
     httpx
-    libparse-python
+    lln-libparse
     lxml
     numpy
     pandas
