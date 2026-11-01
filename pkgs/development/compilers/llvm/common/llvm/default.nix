@@ -613,7 +613,7 @@ stdenv.mkDerivation (
         # so build a reduced set of things that is vaguely reasonable
         #
         # ARM is here because cargo-auditable tests just assume LLVM knows what an ARM is. Don't ask.
-        (lib.cmakeFeature "LLVM_TARGETS_TO_BUILD" "Native;AMDGPU;ARM;BPF;SPIRV;WebAssembly")
+        (lib.cmakeFeature "LLVM_TARGETS_TO_BUILD" "Native;AMDGPU;ARM;BPF;NVPTX;SPIRV;WebAssembly")
       ]
       ++ devExtraCmakeFlags;
 
